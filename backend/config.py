@@ -1,0 +1,4 @@
+RPC_URL = "http://127.0.0.1:7545"
+CONTRACT_BUILD_PATH = "../build/contracts/CertificateVerification.json"
+CONTRACT_ADDRESS = "0x0C39251e8D1BeB5BB98aAbf0e47ce31DdfBBd24A"
+DEFAULT_ACCOUNT_INDEX = 0

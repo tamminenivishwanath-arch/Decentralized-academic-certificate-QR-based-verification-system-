@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CertiVerify Design System - Glassmorphism with Deep Blue/Teal */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* Deep blue/teal gradient palette */
+    --background: 210 80% 5%;
+    --foreground: 200 20% 95%;
+
+    --card: 200 40% 10%;
+    --card-foreground: 200 20% 95%;
+
+    --popover: 200 40% 8%;
+    --popover-foreground: 200 20% 95%;
+
+    /* Teal primary */
+    --primary: 174 72% 40%;
+    --primary-foreground: 200 20% 98%;
+
+    /* Secondary - subtle blue */
+    --secondary: 200 30% 15%;
+    --secondary-foreground: 200 20% 90%;
+
+    --muted: 200 25% 18%;
+    --muted-foreground: 200 15% 60%;
+
+    /* Teal accent */
+    --accent: 174 60% 45%;
+    --accent-foreground: 200 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success green */
+    --success: 152 69% 40%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 10%;
+
+    --border: 200 30% 20%;
+    --input: 200 30% 15%;
+    --ring: 174 72% 40%;
+
+    --radius: 0.75rem;
+
+    /* Glass effect colors */
+    --glass-bg: 200 30% 100% / 0.06;
+    --glass-border: 200 30% 100% / 0.08;
+    --glass-shadow: 200 50% 5% / 0.5;
+
+    /* Gradient stops */
+    --gradient-start: 210 80% 5%;
+    --gradient-mid: 195 60% 12%;
+    --gradient-end: 180 55% 15%;
+  }
+
+  .dark {
+    --background: 210 80% 5%;
+    --foreground: 200 20% 95%;
+    --card: 200 40% 10%;
+    --card-foreground: 200 20% 95%;
+    --popover: 200 40% 8%;
+    --popover-foreground: 200 20% 95%;
+    --primary: 174 72% 40%;
+    --primary-foreground: 200 20% 98%;
+    --secondary: 200 30% 15%;
+    --secondary-foreground: 200 20% 90%;
+    --muted: 200 25% 18%;
+    --muted-foreground: 200 15% 60%;
+    --accent: 174 60% 45%;
+    --accent-foreground: 200 20% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 30% 20%;
+    --input: 200 30% 15%;
+    --ring: 174 72% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, 
+      hsl(var(--gradient-start)) 0%, 
+      hsl(var(--gradient-mid)) 50%, 
+      hsl(var(--gradient-end)) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply backdrop-blur-md rounded-2xl border shadow-2xl;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    box-shadow: 
+      0 8px 32px hsl(var(--glass-shadow)),
+      0 0 0 1px hsl(200 30% 100% / 0.05) inset;
+  }
+
+  /* Glass card hover effect */
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply scale-[1.02];
+    box-shadow: 
+      0 12px 48px hsl(var(--glass-shadow)),
+      0 0 0 1px hsl(200 30% 100% / 0.1) inset;
+  }
+
+  /* Primary button with 3D shadow */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-medium rounded-lg px-5 py-2.5;
+    @apply transition-all duration-200 ease-out;
+    box-shadow: 0 8px 24px hsl(174 72% 30% / 0.35);
+  }
+
+  .btn-primary:hover {
+    @apply translate-y-0.5 brightness-110;
+    box-shadow: 0 4px 16px hsl(174 72% 30% / 0.4);
+  }
+
+  .btn-primary:active {
+    @apply translate-y-1;
+    box-shadow: 0 2px 8px hsl(174 72% 30% / 0.3);
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed translate-y-0;
+    box-shadow: none;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply text-foreground/80 font-medium rounded-lg px-5 py-2.5;
+    @apply border border-border/30 bg-transparent;
+    @apply transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-muted/30 border-border/50 text-foreground;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply bg-destructive text-destructive-foreground font-medium rounded-lg px-5 py-2.5;
+    @apply transition-all duration-200;
+    box-shadow: 0 8px 24px hsl(0 72% 40% / 0.25);
+  }
+
+  .btn-danger:hover {
+    @apply translate-y-0.5 brightness-110;
+  }
+
+  /* Input styles */
+  .input-glass {
+    @apply w-full px-4 py-3 rounded-lg;
+    @apply bg-muted/40 border border-border/40;
+    @apply text-foreground placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50;
+    @apply transition-all duration-200;
+  }
+
+  /* Hash display */
+  .hash-display {
+    @apply font-mono text-sm break-all p-3 rounded-lg;
+    @apply bg-muted/30 border border-border/30;
+    @apply text-primary;
+  }
+
+  /* Status indicators */
+  .status-dot {
+    @apply w-2.5 h-2.5 rounded-full;
+  }
+
+  .status-dot-success {
+    @apply status-dot bg-success;
+    box-shadow: 0 0 8px hsl(var(--success));
+  }
+
+  .status-dot-warning {
+    @apply status-dot bg-warning;
+    box-shadow: 0 0 8px hsl(var(--warning));
+  }
+
+  .status-dot-error {
+    @apply status-dot bg-destructive;
+    box-shadow: 0 0 8px hsl(var(--destructive));
+  }
+
+  /* Tab styles */
+  .tab-button {
+    @apply px-6 py-3 font-medium text-muted-foreground;
+    @apply border-b-2 border-transparent;
+    @apply transition-all duration-200;
+  }
+
+  .tab-button:hover {
+    @apply text-foreground/80;
+  }
+
+  .tab-button-active {
+    @apply text-primary border-primary;
+  }
+}
+
+@layer utilities {
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(174 72% 50%), hsl(190 70% 60%));
+  }
+
+  /* Subtle glow */
+  .glow-primary {
+    box-shadow: 0 0 40px hsl(174 72% 40% / 0.2);
+  }
+
+  /* Animated gradient background */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Slide up animation */
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse glow */
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(174 72% 40% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(174 72% 40% / 0.5); }
+  }
+
+  /* Spin animation for loading */
+  .animate-spin-slow {
+    animation: spin 1.5s linear infinite;
+  }
+}
